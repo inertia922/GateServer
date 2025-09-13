@@ -23,7 +23,7 @@ void CServer::Start()
 			self->Start();
 		}
 		catch (std::exception& e) {
-			
+			std::cout << "CServer accept exception:" << e.what() << std::endl;
 		}
 		});
 

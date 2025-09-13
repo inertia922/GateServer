@@ -3,11 +3,15 @@
 #include <json/value.h>
 #include <json/reader.h>
 #include "CServer.h"
+#include "ConfigMgr.h"
+
 
 int main()
 {
+	
+	std::string gate_port_str = ConfigMgr::getInstance()["GateServer"]["Port"];
+    unsigned short port = std::atoi(gate_port_str.c_str());
     try {
-        uint16_t port = 8080;
         net::io_context ioc{ 1 }; //1个io线程
 
         boost::asio::signal_set signals(ioc, SIGINT, SIGTERM);
