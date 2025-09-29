@@ -14,6 +14,7 @@ class VerifyGrpcClient:public SingleTon<VerifyGrpcClient>
 {
 public:
 	GetVerifyRsp GetVarifyCode(std::string email) {
+		using namespace std;
 		ClientContext context;
 		GetVerifyRsp reply;
 		GetVerifyReq request;
@@ -21,7 +22,10 @@ public:
 		Status status = stub_->GetVerifyCode(&context, request, &reply);
 		if (!status.ok()) {
 			reply.set_error(ErrorCodes::RPCFailed);
+			cout << "errcode: " << status.error_code() << endl;
 		}
+		
+		cout << "rpc request success£¬reply: " << reply.DebugString() << endl;
 		return std::move(reply);
 	}
 	VerifyGrpcClient() {
